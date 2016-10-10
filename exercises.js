@@ -75,8 +75,19 @@ function isVowel(char){
 
 function rovarspraket(phrase){
     "use strict";
-  }
+    var newPhrase = '';
+    for(var i = 0; i < phrase.length; i++){
+      var char = phrase[i];
+      if(isVowel(char) || char == ' '){
+        newPhrase += char;
+      } else {
+        newPhrase += char + 'o' + char;
+      }
+    }
 
+    return newPhrase;
+  }
+console.assert(rovarspraket('this is fun') === 'tothohisos isos fofunon');
 //console.log(rovarspraket('this is fun'));
 
 // ---------------------
@@ -149,16 +160,43 @@ console.log(findLongestWord(['am', 'you', 'function']));
 // Write a function filterLongWords() that takes an array of words and an integer i and returns the array of words that are longer than i.
 // ---------------------
 
-function filterLongWords(words, i){
+function filterLongWords(words, maxLength){
     "use strict";
-    //...
-}
+    var listOfLongWords = [];
 
+    for(var i = 0; i < words.length; i++){
+      var word = words[i];
+      if(word.length > maxLength){
+        listOfLongWords.push(word);
+      }
+    }
+    return listOfLongWords;
+}
+var result = (filterLongWords(['a', 'the', 'be'], 2));
+console.assert(result.length === 1);
+console.assert(result[0] === 'the');
 // ---------------------
 // Write a function charFreq() that takes a string and builds a frequency listing of the characters contained in it. Represent the frequency listing as a Javascript object. Try it with something like charFreq("abbabcbdbabdbdbabababcbcbab").
 // ---------------------
+var string = 'aaaabbbbbcccddddd';
 
 function charFreq(string){
     "use strict";
-    //...
+
+    var freq = {};
+
+    for(var i = 0; i < string.length; i++){
+      var char = string[i];
+      if(freq[char]){
+        freq[char] = freq[char] + 1;
+      } else {
+        freq[char] = 1;
+      }
+    }
+    return freq;
+
 }
+
+var frequency = charFreq(string);
+console.log('frequency', frequency);
+// console.assert(frequency === {'a': 4, 'b': 5, 'c': 3, 'd': 5});
